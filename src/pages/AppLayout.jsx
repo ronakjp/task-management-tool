@@ -5,10 +5,14 @@ import TextField from "@mui/material/TextField";
 
 const AppLayout = () => {
   return (
-    <>
-      <Header />
-      <Outlet />
-    </>
+    <div className="flex flex-col">
+      <div>
+        <Header />
+      </div>
+      <div className="h-screen flex flex-col justify-center items-center ">
+        <Outlet />
+      </div>
+    </div>
   );
 };
 
