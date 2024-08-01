@@ -1,9 +1,8 @@
 import React from "react";
-import TextField from "@mui/material/TextField";
 import { Form } from "react-router-dom";
 const Login = () => {
   return (
-    <div className=" flex flex-col bg-orange-50  border-orange-300 border-1 rounded-xl w-1/2">
+    <div className=" flex flex-col bg-orange-50  border-orange-300 border-1 shadow-lg rounded-xl w-1/2">
       <div className="p-11 flex flex-col h-full items-center justify-center mb-12">
         <div className="flex w-full justify-center ">
           <h1 className="text-xl font-bold">Login</h1>
@@ -35,7 +34,7 @@ const Login = () => {
             </div>
             <div className="flex justify-center">
               <button
-                className="mt-10 mx-11 h-10 bg-orange-400 bg-opacity-20 rounded-lg w-full font-bold "
+                className="mt-10 mx-11 h-10 bg-orange-400 bg-opacity-70 rounded-lg w-full font-bold  active:bg-opacity-35 "
                 type="submit"
               >
                 Login

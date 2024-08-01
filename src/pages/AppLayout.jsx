@@ -1,7 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Header from "../components/Header";
-import TextField from "@mui/material/TextField";
 
 const AppLayout = () => {
   return (
@@ -9,7 +8,7 @@ const AppLayout = () => {
       <div>
         <Header />
       </div>
-      <div className="h-screen flex flex-col justify-center items-center ">
+      <div className="h-screen flex flex-col justify-center items-center">
         <Outlet />
       </div>
     </div>
