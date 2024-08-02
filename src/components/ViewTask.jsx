@@ -1,15 +1,22 @@
 import React, { useState } from "react";
 import { MdDelete } from "react-icons/md";
+import { MdEditSquare } from "react-icons/md";
 
 import ViewModal from "../Modal/ViewModal";
 import EditTask from "./EditTask";
+import { useSelector } from "react-redux";
 
 const ViewTask = () => {
   const [open, setOpen] = useState(false);
 
+  const tasks = useSelector((state) => state.reducer1.tasks);
+
   function handleOnClose() {
     setOpen(false);
   }
+
+  console.log(tasks);
+
   return (
     <>
       <ViewModal isOpen={open}>
@@ -25,12 +32,8 @@ const ViewTask = () => {
               <div>Status</div>
             </div>
           </li>
-          <li
-            className="mt-3 hover:cursor-pointer hover:shadow-2xl hover:border hover:rounded hover:opacity-80 font-thin w-full rounded-sm bg-orange-100 shadow-md mb-5 p-7 border-b-[1px] border-black"
-            onClick={() => {
-              setOpen(true);
-            }}
-          >
+
+          <li className="mt-3 hover:cursor-pointer hover:shadow-2xl hover:border hover:rounded hover:opacity-80 font-thin w-full rounded-sm bg-orange-100 shadow-md mb-5 p-7 border-b-[1px] border-black">
             <div className="flex justify-between p-2">
               <div className="w-1/3 text-justify m-2">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
@@ -47,7 +50,14 @@ const ViewTask = () => {
                   <option value="In Progress">In Progress</option>
                   <option value="Completed">Completed</option>
                 </select>
-                <MdDelete size={32} className="ml-3  hover:text-red-600" />
+                <MdDelete size={32} className="ml-3  hover:text-red-600 " />
+                <MdEditSquare
+                  size={28}
+                  className="ml-3 hover:text-indigo-400"
+                  onClick={() => {
+                    setOpen(true);
+                  }}
+                />
               </div>
             </div>
           </li>
