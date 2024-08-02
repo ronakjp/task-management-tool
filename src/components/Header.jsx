@@ -33,6 +33,23 @@ const Header = () => {
             >
               Login
             </NavLink>
+            <NavLink
+              to={"/addtask"}
+              className={({ isActive }) =>
+                isActive ? "text-black" + " underline" : ""
+              }
+            >
+              Add Task
+            </NavLink>
+
+            <NavLink
+              to={"/viewtask"}
+              className={({ isActive }) =>
+                isActive ? "text-black" + " underline" : ""
+              }
+            >
+              View Task
+            </NavLink>
           </ul>
         </div>
       </div>

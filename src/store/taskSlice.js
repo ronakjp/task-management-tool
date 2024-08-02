@@ -13,12 +13,14 @@ const taskSlice = createSlice({
       counter += 1;
       state.tasks.push(taskData);
     },
-      deleteTask(state, action) {
-        
-      const index = state.tasks.indexOf((each) => {
+    deleteTask(state, action) {
+      const index = state.tasks.findIndex((each) => {
         return each.id === action.payload;
       });
-//simply removing the object present at the index
+      //simply removing the object present at the index
+
+      console.log("index to be deleted ", index);
+
       state.tasks.splice(index, 1);
     },
     editTask(state, action) {
@@ -27,7 +29,6 @@ const taskSlice = createSlice({
       const index = state.tasks.findIndex((each) => each.id === id);
       //setting up the new edited task value obj to the object present at the index
       state.tasks[index] = newTaskData;
-      
     },
   },
 });

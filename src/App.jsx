@@ -6,8 +6,6 @@ import AppLayout from "./pages/AppLayout";
 import Login from "./components/Login";
 import AddTask, { handleOnAddTask } from "./components/AddTask";
 import ViewTask, { handleEditedData } from "./components/ViewTask";
-
-
 export const router = createBrowserRouter([
   {
     element: <AppLayout />,

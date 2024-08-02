@@ -9,6 +9,7 @@ import { useActionData, useNavigate } from "react-router-dom";
 
 const ViewTask = () => {
   const [open, setOpen] = useState(false);
+  const [currentTask, setCurrentTask] = useState(null);
   const tasks = useSelector((state) => state.reducer1.tasks);
   const dispatch = useDispatch();
   const editedData = useActionData();
@@ -69,7 +70,7 @@ const ViewTask = () => {
             >
               {/* This is the Modal component rendering at the root level so placing anywhere should be fine */}
               <ViewModal isOpen={open}>
-                <EditTask onClose={handleOnClose} taskData={eachTask} />
+                <EditTask onClose={handleOnClose} taskData={currentTask} />
               </ViewModal>
               <div className="flex justify-between p-2">
                 <div className="w-1/3 text-justify m-2">{eachTask.title}</div>
@@ -88,13 +89,17 @@ const ViewTask = () => {
                   <MdDelete
                     size={32}
                     className="ml-3  hover:text-red-600 "
-                    onClick={() => handleOnDelete(eachTask.id)}
+                    onClick={() => {
+                      console.log("task id", eachTask.id);
+                      handleOnDelete(eachTask.id);
+                    }}
                   />
                   <MdEditSquare
                     size={28}
                     className="ml-3 hover:text-indigo-400"
                     onClick={() => {
                       setOpen(true);
+                      setCurrentTask(eachTask);
                     }}
                   />
                 </div>
