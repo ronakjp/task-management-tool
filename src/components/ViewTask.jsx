@@ -17,6 +17,17 @@ const ViewTask = () => {
 
   console.log(tasks);
 
+  //This function retuns the Tailwind CSS bg colour property depending on the status passed
+  function getColor(statusType) {
+    if (statusType === "Completed") {
+      return "bg-green-400";
+    } else if (statusType === "To Do") {
+      return "bg-red-400";
+    } else if (statusType === "In Progress") {
+      return "bg-yellow-400";
+    }
+  }
+
   return (
     <>
       <ViewModal isOpen={open}>
@@ -33,51 +44,37 @@ const ViewTask = () => {
             </div>
           </li>
 
-          <li className="mt-3 hover:cursor-pointer hover:shadow-2xl hover:border hover:rounded hover:opacity-80 font-thin w-full rounded-sm bg-orange-100 shadow-md mb-5 p-7 border-b-[1px] border-black">
-            <div className="flex justify-between p-2">
-              <div className="w-1/3 text-justify m-2">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+          {tasks.map((eachTask) => (
+            <li className="mt-3 hover:cursor-pointer hover:shadow-2xl hover:border hover:rounded hover:opacity-80 font-thin w-full rounded-sm bg-orange-100 shadow-md mb-5 p-7 border-b-[1px] border-black">
+              <div className="flex justify-between p-2">
+                <div className="w-1/3 text-justify m-2">{eachTask.title}</div>
+                <div className="w-1/3 text-justify m-2">
+                  {eachTask.description}
+                </div>
+                <div className="flex items-center">
+                  <div
+                    className={`flex justify-center items-center font-medium mt-2 h-10 rounded-md placeholder:font-thin opacity-80 w-32 pb-2 italic ${getColor(
+                      eachTask.status
+                    )} `}
+                  >
+                    <span>{eachTask.status}</span>
+                  </div>
+
+                  <MdDelete size={32} className="ml-3  hover:text-red-600 " />
+                  <MdEditSquare
+                    size={28}
+                    className="ml-3 hover:text-indigo-400"
+                    onClick={() => {
+                      setOpen(true);
+                    }}
+                  />
+                </div>
               </div>
-              <div className="w-1/3 text-justify m-2">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa
-                laudantium, sit ex, ullam molestiae sequi eligendi asperiores
-                accusantium corporis enim quod, a adipisci libero? Illum dolores
-                vero dolore repellat sed!
-              </div>
-              <div className="flex items-center">
-                <select className="font-medium mt-2 h-10 bg-red-200 rounded-md placeholder:font-thin opacity-80 w-32 shadow-xl pb-2 italic border-0 border-black border-b-2 ">
-                  <option value="To Do">To Do</option>
-                  <option value="In Progress">In Progress</option>
-                  <option value="Completed">Completed</option>
-                </select>
-                <MdDelete size={32} className="ml-3  hover:text-red-600 " />
-                <MdEditSquare
-                  size={28}
-                  className="ml-3 hover:text-indigo-400"
-                  onClick={() => {
-                    setOpen(true);
-                  }}
-                />
-              </div>
-            </div>
-          </li>
+            </li>
+          ))}
         </ul>
       </div>
     </>
-    // <div className="h-full w-full rounded-b-2xl">
-    //   <div className="flex justify-center h-full items-center">
-    //     <ul className="flex flex-col w-full items-center">
-    //       <li className="w-full ">Task1</li>
-    //       <li>Task1</li>
-    //       <li>Task1</li>
-    //       <li>Task1</li>
-    //       <li>Task1</li>
-    //       <li>Task1</li>
-    //       <li>Task1</li>
-    //       <li>Task1</li>
-    //     </ul>
-    //   </div>
-    // </div>
   );
 };
 
