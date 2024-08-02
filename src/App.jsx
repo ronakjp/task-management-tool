@@ -4,7 +4,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Home from "./components/Home";
 import AppLayout from "./pages/AppLayout";
 import Login from "./components/Login";
-import AddTask from "./components/AddTask";
+import AddTask, { handleOnAddTask } from "./components/AddTask";
 import ViewTask from "./components/ViewTask";
 import EditTask from "./components/EditTask";
 
@@ -24,6 +24,8 @@ export const router = createBrowserRouter([
       {
         path: "/addtask",
         element: <AddTask />,
+
+        action: handleOnAddTask,
       },
       {
         path: "/viewtask",
