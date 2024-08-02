@@ -2,14 +2,16 @@ import React from "react";
 
 const Home = () => {
   return (
-    <div className=" h-screen flex flex-col justify-center items-center ">
-      <h1 className="text-xl p-11 text-cyan-700">
-        Welcome to the Task Management App
-      </h1>
-      <span className="text-lg m-3 p-2 text-orange-500">
-        Click login to get started ...
-      </span>
-    </div>
+    <>
+      <div className=" h-screen flex flex-col justify-center items-center ">
+        <h1 className="text-xl p-11 text-cyan-700">
+          Welcome to the Task Management App
+        </h1>
+        <span className="text-lg m-3 p-2 text-orange-500">
+          Click login to get started ...
+        </span>
+      </div>
+    </>
   );
 };
 

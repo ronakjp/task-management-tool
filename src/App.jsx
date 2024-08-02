@@ -6,6 +6,7 @@ import AppLayout from "./pages/AppLayout";
 import Login from "./components/Login";
 import AddTask from "./components/AddTask";
 import ViewTask from "./components/ViewTask";
+import EditTask from "./components/EditTask";
 
 export const router = createBrowserRouter([
   {
