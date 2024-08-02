@@ -4,12 +4,15 @@ import { MdEditSquare } from "react-icons/md";
 
 import ViewModal from "../Modal/ViewModal";
 import EditTask from "./EditTask";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { taskActions } from "../store/taskSlice";
 
 const ViewTask = () => {
   const [open, setOpen] = useState(false);
 
   const tasks = useSelector((state) => state.reducer1.tasks);
+
+  const dispatch = useDispatch();
 
   function handleOnClose() {
     setOpen(false);
@@ -25,6 +28,15 @@ const ViewTask = () => {
       return "bg-red-400";
     } else if (statusType === "In Progress") {
       return "bg-yellow-400";
+    }
+  }
+
+  //function to dipatch the delete action for the given taskId
+  function handleOnDelete(taskId) {
+    const res = confirm("Are you sure you want to delete ?");
+
+    if (res) {
+      dispatch(taskActions.deleteTask(taskId));
     }
   }
 
@@ -45,7 +57,10 @@ const ViewTask = () => {
           </li>
 
           {tasks.map((eachTask) => (
-            <li className="mt-3 hover:cursor-pointer hover:shadow-2xl hover:border hover:rounded hover:opacity-80 font-thin w-full rounded-sm bg-orange-100 shadow-md mb-5 p-7 border-b-[1px] border-black">
+            <li
+              key={eachTask.id}
+              className="mt-3 hover:cursor-pointer hover:shadow-2xl hover:border hover:rounded hover:opacity-80 font-thin w-full rounded-sm bg-orange-100 shadow-md mb-5 p-7 border-b-[1px] border-black"
+            >
               <div className="flex justify-between p-2">
                 <div className="w-1/3 text-justify m-2">{eachTask.title}</div>
                 <div className="w-1/3 text-justify m-2">
@@ -60,7 +75,11 @@ const ViewTask = () => {
                     <span>{eachTask.status}</span>
                   </div>
 
-                  <MdDelete size={32} className="ml-3  hover:text-red-600 " />
+                  <MdDelete
+                    size={32}
+                    className="ml-3  hover:text-red-600 "
+                    onClick={() => handleOnDelete(eachTask.id)}
+                  />
                   <MdEditSquare
                     size={28}
                     className="ml-3 hover:text-indigo-400"
