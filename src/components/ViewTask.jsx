@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { MdOutlineEdit } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
+
 import ViewModal from "../Modal/ViewModal";
 import EditTask from "./EditTask";
 
@@ -22,7 +23,6 @@ const ViewTask = () => {
               <div>Task Title</div>
               <div>Task Description</div>
               <div>Status</div>
-              <div>Delete</div>
             </div>
           </li>
           <li
@@ -41,11 +41,14 @@ const ViewTask = () => {
                 accusantium corporis enim quod, a adipisci libero? Illum dolores
                 vero dolore repellat sed!
               </div>
-              <select className="font-medium mt-2 h-10 bg-red-200 rounded-md placeholder:font-thin opacity-80 w-32 shadow-xl pb-2 italic border-0 border-black border-b-2 ">
-                <option value="To Do">To Do</option>
-                <option value="In Progress">In Progress</option>
-                <option value="Completed">Completed</option>
-              </select>
+              <div className="flex items-center">
+                <select className="font-medium mt-2 h-10 bg-red-200 rounded-md placeholder:font-thin opacity-80 w-32 shadow-xl pb-2 italic border-0 border-black border-b-2 ">
+                  <option value="To Do">To Do</option>
+                  <option value="In Progress">In Progress</option>
+                  <option value="Completed">Completed</option>
+                </select>
+                <MdDelete size={32} className="ml-3  hover:text-red-600" />
+              </div>
             </div>
           </li>
         </ul>
