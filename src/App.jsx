@@ -5,8 +5,8 @@ import Home from "./components/Home";
 import AppLayout from "./pages/AppLayout";
 import Login from "./components/Login";
 import AddTask, { handleOnAddTask } from "./components/AddTask";
-import ViewTask from "./components/ViewTask";
-import EditTask from "./components/EditTask";
+import ViewTask, { handleEditedData } from "./components/ViewTask";
+
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +30,7 @@ export const router = createBrowserRouter([
       {
         path: "/viewtask",
         element: <ViewTask />,
+        action: handleEditedData,
       },
     ],
   },

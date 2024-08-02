@@ -8,19 +8,27 @@ const taskSlice = createSlice({
   initialState,
   reducers: {
     addTask(state, action) {
-      const uData = action.payload;
-      uData.id = counter;
+      const taskData = action.payload;
+      taskData.id = "" + counter;
       counter += 1;
-      state.tasks.push(uData);
+      state.tasks.push(taskData);
     },
-    deleteTask(state, action) {
+      deleteTask(state, action) {
+        
       const index = state.tasks.indexOf((each) => {
         return each.id === action.payload;
       });
-
+//simply removing the object present at the index
       state.tasks.splice(index, 1);
     },
-    editTask(state, action) {},
+    editTask(state, action) {
+      const { id, newTaskData } = action.payload;
+      //retrieving the id
+      const index = state.tasks.findIndex((each) => each.id === id);
+      //setting up the new edited task value obj to the object present at the index
+      state.tasks[index] = newTaskData;
+      
+    },
   },
 });
 

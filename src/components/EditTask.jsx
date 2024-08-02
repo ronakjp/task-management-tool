@@ -1,6 +1,8 @@
 import React from "react";
-import { Form } from "react-router-dom";
-const EditTask = ({ onClose }) => {
+import { Form, useActionData, useNavigate } from "react-router-dom";
+const EditTask = ({ onClose, taskData }) => {
+  console.log("not edited data", taskData);
+
   return (
     <div className=" fixed flex flex-col bg-orange-50  border-orange-300 border-1 rounded-xl shadow-lg w-1/3 h-[95%]">
       <div className="p-11 flex flex-col h-full  mb-12">
@@ -10,6 +12,14 @@ const EditTask = ({ onClose }) => {
         <div className="w-full">
           <Form className="flex flex-col mt-9 " method="post">
             <div className="font-light flex p-6 flex-col ">
+              {/* this will have the id of the task which will be used when we are going to update the data for the 
+              specific task this willl be HIDDEN it is just for our reference*/}
+              <input
+                hidden={true}
+                name="id"
+                type="text"
+                defaultValue={taskData.id}
+              />
               <label className="mt-2" htmlFor="title">
                 Title
               </label>
@@ -19,6 +29,7 @@ const EditTask = ({ onClose }) => {
                 id="title"
                 name="title"
                 placeholder="Enter task's title"
+                defaultValue={taskData.title}
               />
               <label className="mt-2" htmlFor="description">
                 Description
@@ -30,6 +41,7 @@ const EditTask = ({ onClose }) => {
                 rows={8}
                 cols={40}
                 placeholder="Enter task's description"
+                defaultValue={taskData.description}
               />
 
               <label className="mt-7" htmlFor="cars">
@@ -40,6 +52,7 @@ const EditTask = ({ onClose }) => {
                 className="rounded-md mt-2 h-10 "
                 name="status"
                 id="status"
+                defaultValue={taskData.status}
               >
                 <option value="To Do">To Do</option>
                 <option value="In Progress">In Progress</option>
