@@ -2,12 +2,20 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Form, useActionData, useNavigate } from "react-router-dom";
 import { loginStatusActions } from "../store/loginStatusSlice";
+import { useForm } from "react-hook-form";
 const Login = () => {
-  const userCredentials = useActionData();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
+  const onSubmit = (userCredentials) => {
+    console.log(userCredentials); // This will contain the form data
+    // Form submission handled by React Router's Form component
     if (userCredentials) {
       if (
         userCredentials.email === "rjpatel7991@gmail.com" &&
@@ -21,7 +29,7 @@ const Login = () => {
         console.log("NOT AUTHORIZED");
       }
     }
-  }, [userCredentials]);
+  };
 
   return (
     <div className=" flex flex-col bg-orange-50  border-orange-300 border-1 shadow-lg rounded-xl w-1/2">
@@ -30,19 +38,36 @@ const Login = () => {
           <h1 className="text-xl font-bold">Login</h1>
         </div>
         <div className="w-full">
-          <Form className="flex flex-col mt-9 " method="post">
+          <Form
+            className="flex flex-col mt-9 "
+            method="post"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <div className="font-light flex p-6 flex-col ">
               <label className="mt-2" htmlFor="email">
                 Email
               </label>
               <input
                 className="rounded-md mt-2 h-10  placeholder:text-slate-200 placeholder:italic"
-                type="email"
+                type="text"
                 id="email"
                 name="email"
+                {...register("email", {
+                  required: "Please enter the email..",
+                  validate: (val) => {
+                    if (!val.includes("@")) {
+                      return "Email must include @ character..";
+                    }
+
+                    return true;
+                  },
+                })}
                 placeholder="Enter your email"
               />
 
+              {errors.email && (
+                <span className="text-red-500">{errors.email.message}</span>
+              )}
               <label className="mt-6" htmlFor="password">
                 Password
               </label>
@@ -51,8 +76,21 @@ const Login = () => {
                 id="password"
                 type="password"
                 name="password"
+                {...register("password", {
+                  required: "Please enter the password ..",
+                  validate: (val) => {
+                    if (val.length < 3) {
+                      return "Passwords must be atleast 4 characters long";
+                    }
+                    return true;
+                  },
+                })}
                 placeholder="Enter your password"
               />
+
+              {errors.password && (
+                <span className="text-red-500">{errors.password.message}</span>
+              )}
             </div>
             <div className="flex justify-center">
               <button
@@ -70,13 +108,3 @@ const Login = () => {
 };
 
 export default Login;
-
-export async function handleLogin({ request }) {
-  const data = await request.formData();
-
-  const credentials = Object.fromEntries(data.entries());
-
-  console.log(credentials);
-
-  return credentials;
-}

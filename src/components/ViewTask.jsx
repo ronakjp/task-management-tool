@@ -64,6 +64,13 @@ const ViewTask = () => {
             </div>
           </li>
 
+          {/* will be shown if tasks array is empty */}
+          {tasks.length === 0 && (
+            <div className="flex justify-center items-center h-full">
+              <div>There are no tasks. Please add them ...</div>
+            </div>
+          )}
+
           {tasks.map((eachTask) => (
             <li
               key={eachTask.id}
