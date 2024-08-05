@@ -25,11 +25,12 @@ const ViewTask = () => {
     }
   }, [editedData, open]);
 
+  //dispatching this action on every render of this component just to state variable in sync with local storage
+  dispatch(taskActions.initialLoad());
+
   function handleOnClose() {
     setOpen(false);
   }
-
-  console.log(tasks);
 
   //This function retuns the Tailwind CSS bg colour property depending on the status passed
   function getColor(statusType) {

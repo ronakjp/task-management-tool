@@ -57,9 +57,6 @@ const Header = () => {
 
             {loginStatus ? (
               <button
-                className={({ isActive }) =>
-                  isActive ? "text-black" + " underline" : ""
-                }
                 onClick={() => {
                   dispatch(loginStatusActions.doLogout());
                 }}
