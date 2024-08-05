@@ -6,11 +6,11 @@ const loginStatusSlice = createSlice({
   name: "loginStatus",
   initialState,
   reducers: {
-    doLogin(state, action) {
+    doLogin(state) {
       state.isLoggedIn = true;
       localStorage.setItem("isLoggedIn", true);
     },
-    doLogout(state, action) {
+    doLogout(state) {
       state.isLoggedIn = false;
       console.log("inside logout slice ", state.isLoggedIn);
 
@@ -18,7 +18,7 @@ const loginStatusSlice = createSlice({
         // localStorage.setItem("isLoggedIn", false);
         localStorage.removeItem("isLoggedIn");
       } catch (e) {
-        console.log("thrown error");
+        console.log(e);
       }
     },
   },

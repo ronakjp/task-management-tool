@@ -58,5 +58,6 @@ function updateLocalStorageArray(currentStateArray) {
   localStorage.setItem("tasks", JSON.stringify(tempArr));
 }
 
+//exporting them to be used in the components where it is needed
 export const taskActions = taskSlice.actions;
 export const taskReducers = taskSlice.reducer;
