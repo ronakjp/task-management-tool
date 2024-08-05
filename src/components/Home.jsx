@@ -8,7 +8,7 @@ const Home = () => {
           Welcome to the Task Management App
         </h1>
         <span className="text-lg m-3 p-2 text-orange-500">
-          Click login to get started ...
+          Start Adding Tasks ...
         </span>
       </div>
     </>

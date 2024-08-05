@@ -1,6 +1,28 @@
-import React from "react";
-import { Form } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Form, useActionData, useNavigate } from "react-router-dom";
+import { loginStatusActions } from "../store/loginStatusSlice";
 const Login = () => {
+  const userCredentials = useActionData();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userCredentials) {
+      if (
+        userCredentials.email === "rjpatel7991@gmail.com" &&
+        userCredentials.password === "ronak"
+      ) {
+        console.log("LOGGED IN SUCCESSFULLY");
+
+        dispatch(loginStatusActions.doLogin());
+        navigate("/");
+      } else {
+        console.log("NOT AUTHORIZED");
+      }
+    }
+  }, [userCredentials]);
+
   return (
     <div className=" flex flex-col bg-orange-50  border-orange-300 border-1 shadow-lg rounded-xl w-1/2">
       <div className="p-11 flex flex-col h-full items-center justify-center mb-12">
@@ -48,3 +70,13 @@ const Login = () => {
 };
 
 export default Login;
+
+export async function handleLogin({ request }) {
+  const data = await request.formData();
+
+  const credentials = Object.fromEntries(data.entries());
+
+  console.log(credentials);
+
+  return credentials;
+}

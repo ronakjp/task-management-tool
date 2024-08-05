@@ -3,9 +3,10 @@ import "./App.css";
 import { createBrowserRouter } from "react-router-dom";
 import Home from "./components/Home";
 import AppLayout from "./pages/AppLayout";
-import Login from "./components/Login";
+import Login, { handleLogin } from "./components/Login";
 import AddTask, { handleOnAddTask } from "./components/AddTask";
 import ViewTask, { handleEditedData } from "./components/ViewTask";
+import ProtectedRoute from "./routes/ProtectedRoute";
 export const router = createBrowserRouter([
   {
     element: <AppLayout />,
@@ -13,21 +14,22 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: <ProtectedRoute element={<Home />} />,
       },
       {
         path: "/login",
         element: <Login />,
+        action: handleLogin,
       },
       {
         path: "/addtask",
-        element: <AddTask />,
+        element: <ProtectedRoute element={<AddTask />} />,
 
         action: handleOnAddTask,
       },
       {
         path: "/viewtask",
-        element: <ViewTask />,
+        element: <ProtectedRoute element={<ViewTask />} />,
         action: handleEditedData,
       },
     ],

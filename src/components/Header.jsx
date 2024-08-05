@@ -1,9 +1,14 @@
 import React from "react";
 import { DiGitCompare } from "react-icons/di";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { loginStatusActions } from "../store/loginStatusSlice";
 
 const Header = () => {
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const loginStatus = useSelector((state) => state.reducer2.isLoggedIn);
+
   return (
     <div className=" flex h-40 w-full p-1 border-b-2 border-solid border-slate-700 ">
       <div className="flex items-center justify-between w-full">
@@ -17,39 +22,60 @@ const Header = () => {
         </div>
         <div className="w-80">
           <ul className="flex justify-evenly gap-3  text-base text-orange-500 ">
-            <NavLink
-              to={"/"}
-              className={({ isActive }) =>
-                isActive ? "text-black" + " underline" : ""
-              }
-            >
-              Home
-            </NavLink>
-            <NavLink
-              to={"/login"}
-              className={({ isActive }) =>
-                isActive ? "text-black" + " underline" : ""
-              }
-            >
-              Login
-            </NavLink>
-            <NavLink
-              to={"/addtask"}
-              className={({ isActive }) =>
-                isActive ? "text-black" + " underline" : ""
-              }
-            >
-              Add Task
-            </NavLink>
+            {loginStatus && (
+              <NavLink
+                to={"/"}
+                className={({ isActive }) =>
+                  isActive ? "text-black" + " underline" : ""
+                }
+              >
+                Home
+              </NavLink>
+            )}
 
-            <NavLink
-              to={"/viewtask"}
-              className={({ isActive }) =>
-                isActive ? "text-black" + " underline" : ""
-              }
-            >
-              View Task
-            </NavLink>
+            {loginStatus && (
+              <NavLink
+                to={"/addtask"}
+                className={({ isActive }) =>
+                  isActive ? "text-black" + " underline" : ""
+                }
+              >
+                Add Task
+              </NavLink>
+            )}
+
+            {loginStatus && (
+              <NavLink
+                to={"/viewtask"}
+                className={({ isActive }) =>
+                  isActive ? "text-black" + " underline" : ""
+                }
+              >
+                View Task
+              </NavLink>
+            )}
+
+            {loginStatus ? (
+              <button
+                className={({ isActive }) =>
+                  isActive ? "text-black" + " underline" : ""
+                }
+                onClick={() => {
+                  dispatch(loginStatusActions.doLogout());
+                }}
+              >
+                Logout
+              </button>
+            ) : (
+              <NavLink
+                to={"/login"}
+                className={({ isActive }) =>
+                  isActive ? "text-black" + " underline" : ""
+                }
+              >
+                Login
+              </NavLink>
+            )}
           </ul>
         </div>
       </div>
