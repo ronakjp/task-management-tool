@@ -3,9 +3,14 @@ import { useDispatch } from "react-redux";
 import { Form } from "react-router-dom";
 import { taskActions } from "../store/taskSlice";
 import { useForm } from "react-hook-form";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddTask = () => {
   const dispatch = useDispatch();
+  const showToastMessage = () => {
+    toast("Task Added Successfully");
+  };
 
   const {
     register,
@@ -18,6 +23,7 @@ const AddTask = () => {
     console.log("Add dagta ", data);
     dispatch(taskActions.addTask(data));
     reset();
+    showToastMessage();
   }
   return (
     <div className=" flex flex-col bg-orange-50  border-orange-300 border-1 rounded-xl shadow-lg w-2/3">
@@ -26,6 +32,19 @@ const AddTask = () => {
           <h1 className="text-xl font-bold">Add New Task</h1>
         </div>
         <div className="w-full">
+          <ToastContainer
+            position="top-center"
+            autoClose={1500}
+            hideProgressBar
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+            transition:Zoom
+          />
           <Form
             className="flex flex-col mt-9 "
             method="post"
