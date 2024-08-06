@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { generateId, updateLocalStorageArray } from "../utils/utilFunctions";
 
 const initialState = { users: [] };
 
@@ -8,10 +9,11 @@ const registeredUsers = createSlice({
   reducers: {
     registerUserAccount(state, action) {
       const uData = action.payload;
+      uData.uid = generateId("u");
       console.log("Udata ", uData);
 
       state.users.push(uData);
-      updateLocalStorageArray(state.users);
+      updateLocalStorageArray(state.users, "users");
     },
     initialUserLoad(state) {
       console.log("Initial User Load is executed ");
@@ -27,12 +29,6 @@ const registeredUsers = createSlice({
     },
   },
 });
-
-function updateLocalStorageArray(currentStateArray) {
-  const tempArr = [];
-  currentStateArray.map((item) => tempArr.push(item));
-  localStorage.setItem("users", JSON.stringify(tempArr));
-}
 
 export const registeredUsersAction = registeredUsers.actions;
 export const registeredUsersReducer = registeredUsers.reducer;

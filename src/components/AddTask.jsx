@@ -20,6 +20,7 @@ const AddTask = () => {
 
   function handleOnAdd(data) {
     console.log("Add dagta ", data);
+    //adding the current logged in user id as well
     dispatch(taskActions.addTask(data));
     reset();
     showToastMessage();
@@ -31,12 +32,18 @@ const AddTask = () => {
           <h1 className="text-xl font-bold">Add New Task</h1>
         </div>
         <div className="w-full">
-          
           <Form
             className="flex flex-col mt-9 "
             method="post"
             onSubmit={handleSubmit(handleOnAdd)}
           >
+            <input
+              hidden={true}
+              name="uid"
+              type="text"
+              defaultValue={localStorage.getItem("loggedInUserId")}
+              {...register("uid")}
+            />
             <div className="font-light flex p-6 flex-col ">
               <label className="mt-2" htmlFor="title">
                 Title

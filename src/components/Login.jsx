@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { registeredUsersAction } from "../store/registeredUsersSlice";
 
 import { toast } from "react-toastify";
+import { findUserId } from "../utils/utilFunctions";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -24,12 +25,12 @@ const Login = () => {
     console.log(userCredentials); // This will contain the form data
     // Form submission handled by React Router's Form component
     if (userCredentials) {
-      const result = users.find(
-        (eachUser) =>
-          eachUser.email === userCredentials.email &&
-          eachUser.password === userCredentials.password
+      const uid = findUserId(
+        users,
+        userCredentials.email,
+        userCredentials.password
       );
-      if (result) {
+      if (uid) {
         // userCredentials.email === "rjpatel7991@gmail.com" &&
         // userCredentials.password === "ronak"
         console.log("LOGGED IN SUCCESSFULLY");
@@ -37,7 +38,11 @@ const Login = () => {
           position: "top-center",
         });
 
-        dispatch(loginStatusActions.doLogin());
+        dispatch(
+          loginStatusActions.doLogin({
+            uid: uid,
+          })
+        );
 
         navigate("/");
       } else {

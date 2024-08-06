@@ -8,7 +8,6 @@ import { taskActions } from "../store/taskSlice";
 import { useActionData, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-
 const ViewTask = () => {
   const [open, setOpen] = useState(false);
   const [currentTask, setCurrentTask] = useState(null);
@@ -75,49 +74,54 @@ const ViewTask = () => {
             </div>
           )}
 
-          {tasks.map((eachTask) => (
-            <li
-              key={eachTask.id}
-              className="mt-3 hover:cursor-pointer hover:shadow-2xl hover:border hover:rounded hover:opacity-80 font-thin w-full rounded-sm bg-orange-100 shadow-md mb-5 p-7 border-b-[1px] border-black"
-            >
-              {/* This is the Modal component rendering at the root level so placing anywhere should be fine */}
-              <ViewModal isOpen={open}>
-                <EditTask onClose={handleOnClose} taskData={currentTask} />
-              </ViewModal>
-              <div className="flex justify-between p-2">
-                <div className="w-1/3 text-justify m-2">{eachTask.title}</div>
-                <div className="w-1/3 text-justify m-2">
-                  {eachTask.description}
-                </div>
-                <div className="flex items-center">
-                  <div
-                    className={`flex justify-center items-center font-medium mt-2 h-10 rounded-md placeholder:font-thin opacity-80 w-32 pb-2 italic ${getColor(
-                      eachTask.status
-                    )} `}
-                  >
-                    <span>{eachTask.status}</span>
-                  </div>
+          {tasks.map(
+            (eachTask) =>
+              eachTask.uid === localStorage.getItem("loggedInUserId") && (
+                <li
+                  key={eachTask.id}
+                  className="mt-3 hover:cursor-pointer hover:shadow-2xl hover:border hover:rounded hover:opacity-80 font-thin w-full rounded-sm bg-orange-100 shadow-md mb-5 p-7 border-b-[1px] border-black"
+                >
+                  {/* This is the Modal component rendering at the root level so placing anywhere should be fine */}
+                  <ViewModal isOpen={open}>
+                    <EditTask onClose={handleOnClose} taskData={currentTask} />
+                  </ViewModal>
+                  <div className="flex justify-between p-2">
+                    <div className="w-1/3 text-justify m-2">
+                      {eachTask.title}
+                    </div>
+                    <div className="w-1/3 text-justify m-2">
+                      {eachTask.description}
+                    </div>
+                    <div className="flex items-center">
+                      <div
+                        className={`flex justify-center items-center font-medium mt-2 h-10 rounded-md placeholder:font-thin opacity-80 w-32 pb-2 italic ${getColor(
+                          eachTask.status
+                        )} `}
+                      >
+                        <span>{eachTask.status}</span>
+                      </div>
 
-                  <MdDelete
-                    size={32}
-                    className="ml-3  hover:text-red-600 "
-                    onClick={() => {
-                      console.log("task id", eachTask.id);
-                      handleOnDelete(eachTask.id);
-                    }}
-                  />
-                  <MdEditSquare
-                    size={28}
-                    className="ml-3 hover:text-indigo-400"
-                    onClick={() => {
-                      setOpen(true);
-                      setCurrentTask(eachTask);
-                    }}
-                  />
-                </div>
-              </div>
-            </li>
-          ))}
+                      <MdDelete
+                        size={32}
+                        className="ml-3  hover:text-red-600 "
+                        onClick={() => {
+                          console.log("task id", eachTask.id);
+                          handleOnDelete(eachTask.id);
+                        }}
+                      />
+                      <MdEditSquare
+                        size={28}
+                        className="ml-3 hover:text-indigo-400"
+                        onClick={() => {
+                          setOpen(true);
+                          setCurrentTask(eachTask);
+                        }}
+                      />
+                    </div>
+                  </div>
+                </li>
+              )
+          )}
         </ul>
       </div>
     </>

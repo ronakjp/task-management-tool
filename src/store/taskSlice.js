@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { generateId, updateLocalStorageArray } from "../utils/utilFunctions";
 
 const initialState = { tasks: [] };
 //counter for the ID field temporary solution [has to be removed]
@@ -9,11 +10,11 @@ const taskSlice = createSlice({
   reducers: {
     addTask(state, action) {
       const taskData = action.payload;
-      taskData.id = generateId();
+      taskData.id = generateId("t");
 
       state.tasks.push(taskData);
       //syncing up with local storage
-      updateLocalStorageArray(state.tasks);
+      updateLocalStorageArray(state.tasks,"tasks");
     },
     deleteTask(state, action) {
       const index = state.tasks.findIndex((each) => {
@@ -23,7 +24,7 @@ const taskSlice = createSlice({
       console.log("index to be deleted ", index);
       state.tasks.splice(index, 1);
       //syncing up with local storage
-      updateLocalStorageArray(state.tasks);
+      updateLocalStorageArray(state.tasks,"tasks");
     },
     editTask(state, action) {
       const { id, newTaskData } = action.payload;
@@ -32,7 +33,7 @@ const taskSlice = createSlice({
       //setting up the new edited task value obj to the object present at the index
       state.tasks[index] = newTaskData;
       //syncing up with local storage
-      updateLocalStorageArray(state.tasks);
+      updateLocalStorageArray(state.tasks,"tasks");
     },
 
     //this action will be dispatched on every render of the view task component
@@ -50,17 +51,6 @@ const taskSlice = createSlice({
     },
   },
 });
-
-//Accepts the existing state array and syncs with the localstorage array
-function updateLocalStorageArray(currentStateArray) {
-  const tempArr = [];
-  currentStateArray.map((item) => tempArr.push(item));
-  localStorage.setItem("tasks", JSON.stringify(tempArr));
-}
-
-function generateId() {
-  return "tid" + Math.random().toString(16).slice(2);
-}
 
 //exporting them to be used in the components where it is needed
 export const taskActions = taskSlice.actions;

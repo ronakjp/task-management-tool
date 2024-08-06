@@ -11,8 +11,12 @@ const ProtectedRoute = ({ element }) => {
 
   if (existingLoginStatus) {
     if (!loginStatus) {
-      dispatch(loginStatusActions.doLogin());
-    }
+      dispatch(
+        loginStatusActions.doLogin({
+          uid: localStorage.getItem("loggedInUserId"),
+        })
+      );
+    } 
   }
 
   if (!existingLoginStatus) {
