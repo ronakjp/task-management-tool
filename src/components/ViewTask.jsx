@@ -6,8 +6,8 @@ import EditTask from "./EditTask";
 import { useDispatch, useSelector } from "react-redux";
 import { taskActions } from "../store/taskSlice";
 import { useActionData, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+
 
 const ViewTask = () => {
   const [open, setOpen] = useState(false);
@@ -60,19 +60,6 @@ const ViewTask = () => {
     <>
       <div className="flex flex-col bg-orange-50 border border-orange-300 rounded-xl shadow-lg w-3/4 h-3/4 mx-auto my-40 p-4">
         <div className="w-full bg-orange-400 rounded-md mb-1 p-2 sticky top-0 text-lg">
-          <ToastContainer
-            position="top-center"
-            autoClose={1500}
-            hideProgressBar
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="dark"
-            transition:Zoom
-          />
           <div className="flex justify-around font-bold text-center">
             <div>Task Title</div>
             <div>Task Description</div>

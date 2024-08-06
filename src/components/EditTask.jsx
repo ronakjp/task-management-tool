@@ -2,15 +2,16 @@ import React from "react";
 import { Form, useActionData, useNavigate } from "react-router-dom";
 const EditTask = ({ onClose, taskData }) => {
   console.log("not edited data", taskData);
+  
 
-  return (
+    return (
     <div className=" fixed flex flex-col bg-orange-50  border-orange-300 border-1 rounded-xl shadow-lg w-1/3 h-[95%]">
       <div className="p-11 flex flex-col h-full  mb-12">
         <div className="flex w-full justify-center ">
           <h1 className="text-xl font-bold">Edit Task</h1>
         </div>
         <div className="w-full">
-          <Form className="flex flex-col mt-9 " method="post">
+          <Form className="flex flex-col mt-9 " method="post"  >
             <div className="font-light flex p-6 flex-col ">
               {/* this will have the id of the task which will be used when we are going to update the data for the 
               specific task this willl be HIDDEN it is just for our reference*/}

@@ -2,15 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = { tasks: [] };
 //counter for the ID field temporary solution [has to be removed]
-var counter = 1;
+
 const taskSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
     addTask(state, action) {
       const taskData = action.payload;
-      taskData.id = "" + counter;
-      counter += 1;
+      taskData.id = generateId();
+
       state.tasks.push(taskData);
       //syncing up with local storage
       updateLocalStorageArray(state.tasks);
@@ -56,6 +56,10 @@ function updateLocalStorageArray(currentStateArray) {
   const tempArr = [];
   currentStateArray.map((item) => tempArr.push(item));
   localStorage.setItem("tasks", JSON.stringify(tempArr));
+}
+
+function generateId() {
+  return "tid" + Math.random().toString(16).slice(2);
 }
 
 //exporting them to be used in the components where it is needed

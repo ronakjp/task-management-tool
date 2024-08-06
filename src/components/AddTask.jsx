@@ -3,8 +3,7 @@ import { useDispatch } from "react-redux";
 import { Form } from "react-router-dom";
 import { taskActions } from "../store/taskSlice";
 import { useForm } from "react-hook-form";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const AddTask = () => {
   const dispatch = useDispatch();
@@ -32,19 +31,7 @@ const AddTask = () => {
           <h1 className="text-xl font-bold">Add New Task</h1>
         </div>
         <div className="w-full">
-          <ToastContainer
-            position="top-center"
-            autoClose={1500}
-            hideProgressBar
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="dark"
-            transition:Zoom
-          />
+          
           <Form
             className="flex flex-col mt-9 "
             method="post"
@@ -81,6 +68,7 @@ const AddTask = () => {
                     if (val.length < 10) {
                       return "Description must be at least 10 characters long";
                     }
+
                     return true;
                   },
                 })}
