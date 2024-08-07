@@ -11,6 +11,10 @@ export function generateId(type) {
 
 //This function is responsible for finding the uid of the logging in user
 export function findUserId(users, email, password) {
+  if (!users || users.length === 0) {
+    return false;
+  }
+
   const result = users.find(
     (eachUser) => eachUser.email === email && eachUser.password === password
   );
